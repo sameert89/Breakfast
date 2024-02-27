@@ -18,16 +18,17 @@ namespace AsyncBreakfast
             stopWatch.Start();
             Coffee cup = PourCoffee();
             Console.WriteLine("coffee is ready");
-
-            Task<Egg> eggsTask = FryEggs(2);
-            Task<Bacon> baconTask = FryBacon(3);
-            Task<Toast> toastTask = ToastBread(2).ContinueWith(t => {
+            var eggsTask = FryEggs(2);
+            var baconTask = FryBacon(3);
+            var toastTask = ToastBread(2).ContinueWith(t =>
+            {
                 Toast toast = t.Result;
                 ApplyButter(toast);
                 ApplyJam(toast);
                 Console.WriteLine("toast is ready");
                 return toast;
             });
+
 
             Juice oj = PourOJ();
             Console.WriteLine("oj is ready");
